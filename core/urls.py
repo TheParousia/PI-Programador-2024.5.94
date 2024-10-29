@@ -27,7 +27,4 @@ urlpatterns = [
     path('upload/', views.upload_imagem, name='upload_imagem'),
     path('webcam/',views.webcam,name="webcam"),
     path('ler_img/',views.ler_img, name="ler_img"),
-
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
