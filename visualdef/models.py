@@ -1,3 +1,3 @@
 from django.db import models
-
-# Create your models here.
+class MeuModelo(models.Model):
+    imagem = models.ImageField(upload_to='imagens/')
