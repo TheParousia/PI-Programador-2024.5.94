@@ -41,6 +41,3 @@ Para executar o servidor e vizualiar como o projeto estar funcionando execute o 
 ```powershell
 python .\manage.py runserver
 ```
-
-
-
