@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from visualdef import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('form/', views.formularioenvio, name="formulario de envio"),
+    path('form/', views.formularioenvio, name="formulario de envio"),
+    path('',views.visualdef('visualdef.urls')),
+
 ]
