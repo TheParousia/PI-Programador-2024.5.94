@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario</title>
 </head>
 <body>
     
@@ -17,20 +17,31 @@
         <br>
 
         Mensagem
-        <textarea name="mensagem" id=""></textarea>
+        <textarea name="mensagem" id="texto"></textarea>
         <br>
         <input type="submit" value="enviar">
     </form>
 
-    <div>
-        Remetente recebido: {{remetente}}, 
-        resposta:
-        <pre>
-            {{resposta}}
+<div>
+    Remetente recebido: {{remetente}}, 
+    resposta:
+    <pre id="resposta">
+        {{resposta}}
+    </pre>
+</div>
 
-        </pre>
-    </div>
+<input type="button" value="Ler" id="btnLer">
 
-    
+<script>
+    const synth = window.speechSynthesis;
+    const btnLer = document.getElementById("btnLer");
+    const texto = document.getElementById("resposta");
+
+    btnLer.addEventListener("click", ()=>{
+        const estruturaParaFala = new SpeechSynthesisUtterance(texto.textContent);
+        synth.speak(estruturaParaFala);
+    })
+    </script>
+
 </body>
 </html>
