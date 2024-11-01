@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>webcam</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap!</button>
+    <canvas disable id="canvas"  width="640" height="480"></canvas>
+
+    <script>
+        const video = document.getElementById('video')
+        const canvas = document.getElementById('canvas')
+        const snap = document.getElementById('snap')
+        const context = canvas.getContext('2d')
+
+        const drawImage = () => {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height)
+        }
+
+        snap.addEventListener('click', () => {
+            drawImage()
+        })
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream
+                video.play()
+            })
+            .catch(err => {
+                console.error(err)
+            })
+        
+        
+
+    </script>
+</body>
+</html>

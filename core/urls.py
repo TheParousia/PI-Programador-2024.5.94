@@ -23,6 +23,7 @@ urlpatterns = [
     path('form/', views.formularioenvio, name="formulario de envio"),
     #path('',views.visualdef('visualdef.urls')),
     path('upload/', views.upload_imagem, name='upload_imagem'),
+     path('webcam/',views.webcam,name="webcam"),
 
 
 ]

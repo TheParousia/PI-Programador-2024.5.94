@@ -29,5 +29,7 @@ def upload_imagem(request):
     else:
         form = MeuFormulario()
     return render(request, 'meu_template.html', {'form': form})
+def webcam(request):
+    return render(request,"webcam.html")
     
    
