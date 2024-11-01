@@ -1,27 +1,33 @@
 from django.shortcuts import render
 import google.generativeai as genai
+import PIL.Image
 import os
 
 # Create your views here.
-def descricao(request):
+def formulario(request):
 
-
+    contexto = {}
+    if request.method == "POST":
         remetente = request.GET.get("remetente")
         print(remetente)
 
         contexto = {}
 
         if remetente is not None:
-                
-                genai.configure(api_key="AIzaSyCrJHeuVlhGitTdgmnlDY_i7ETfiRMFTC0")
+            GOOGLE_API_KEY = "AIzaSyCrJHeuVlhGitTdgmnlDY_i7ETfiRMFTC0"
 
-                model = genai.GenerativeModel("gemini-1.5-flash")
-                response = model.generate_content(remetente)
-                print(response.text),
+            genai.configure(api_key=GOOGLE_API_KEY)
 
-                contexto = {
-                "remetente": remetente,
-                "resposta": response.text
-                }
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            imagemCarregada = PIL.Image.open(cartao.imagem)
+            response = model.generate_content(remetente)
+            print(response.text),
 
-        return render(request, "formulario.html", contexto)
+            mensagem = response.text
+
+        contexto = {
+            "remetente": remetente,
+            "resposta": response.text
+        }
+
+    return render(request, "formulario.html", contexto)

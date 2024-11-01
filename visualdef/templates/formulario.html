@@ -4,44 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+
 </head>
 <body>
-    
-    <form action="">
-        Remetente
+    <form action=""method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        imagem:
+        <input type="file" name="imagem" id="imagem">
+        <br>
+
+        Remetente:
         <input type="text" name="remetente">
         <br>
 
-        Destinatario
+        Destinatario:
         <input type="text" name="destinatario">
         <br>
 
-        Mensagem
+        Mensagem:
         <textarea name="mensagem" id="texto"></textarea>
         <br>
         <input type="submit" value="enviar">
     </form>
-
 <div>
-    Remetente recebido: {{remetente}}, 
-    resposta:
+    Remetente recebido: {{remetente}}
+    <br>
+    resposta: {{resposta}}
+
+    <img src="/media/{{cartao.imagem}}" alt="{{mensagem}}">
+
     <pre id="resposta">
         {{resposta}}
     </pre>
 </div>
 
-<input type="button" value="Ler" id="btnLer">
+    <input type="button" value="Ler" id="btnLer">
+    <button onclick="pararAudio()">Parar Audiodescrição</button>
 
-<script>
-    const synth = window.speechSynthesis;
-    const btnLer = document.getElementById("btnLer");
-    const texto = document.getElementById("resposta");
+    <script>
+        const synth = window.speechSynthesis;
+        const btnLer = document.getElementById("btnLer");
+        const texto = document.getElementById("resposta");
 
-    btnLer.addEventListener("click", ()=>{
+        btnLer.addEventListener("click", ()=>{
         const estruturaParaFala = new SpeechSynthesisUtterance(texto.textContent);
         synth.speak(estruturaParaFala);
-    })
-    </script>
-
+    });
+</script>
 </body>
 </html>
