@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from.models import Cartao
 import google.generativeai as genai
 import PIL.Image
 import os
