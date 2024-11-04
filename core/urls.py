@@ -19,9 +19,9 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from visualdef import views
-from cartao import views
 
 urlpatterns = [
     path('', views.descricao, name="Descricao.html"),
     path('admin/', admin.site.urls),
+    path('formulario/', views.formulario, name="formulario.html"),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
