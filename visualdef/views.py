@@ -5,6 +5,9 @@ import PIL.Image
 import os
 
 # Create your views here.
+def descricao(request):
+    return render(request, "descricao.html")
+
 def formulario(request):
 
     contexto = {}
