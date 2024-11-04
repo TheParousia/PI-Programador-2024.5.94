@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+    <title>formulario</title>
 
 </head>
 <body>
@@ -24,11 +24,14 @@
         Mensagem:
         <textarea name="mensagem" id="texto"></textarea>
         <br>
+
         <input type="submit" value="enviar">
     </form>
 <div>
+    <br>
     Remetente recebido: {{remetente}}
     <br>
+
     resposta: {{resposta}}
 
     <img src="/media/{{cartao.imagem}}" alt="{{mensagem}}">
@@ -46,7 +49,7 @@
         const btnLer = document.getElementById("btnLer");
         const texto = document.getElementById("resposta");
 
-        btnLer.addEventListener("click", ()=>{
+        btnLer.addEventListener("click", () => {
         const estruturaParaFala = new SpeechSynthesisUtterance(texto.textContent);
         synth.speak(estruturaParaFala);
     });
