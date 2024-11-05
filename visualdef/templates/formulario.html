@@ -4,55 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>formulario</title>
-
 </head>
 <body>
-    <form action=""method="post" enctype="multipart/form-data">
+    <video autoplay></video>
+    <canvas></canvas>
+    <br>
+    <button id="btnTirarFoto">tirar foto</button>
+
+    <form id="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        imagem:
-        <input type="file" name="imagem" id="imagem">
-        <br>
+        <input type="hidden" name="imagem" id="imagemToUpload">
 
-        Remetente:
-        <input type="text" name="remetente">
-        <br>
-
-        Destinatario:
-        <input type="text" name="destinatario">
-        <br>
-
-        Mensagem:
-        <textarea name="mensagem" id="texto"></textarea>
-        <br>
-
-        <input type="submit" value="enviar">
+        <input type="submit" value="Enviar">
     </form>
-<div>
-    <br>
-    Remetente recebido: {{remetente}}
-    <br>
-
-    resposta: {{resposta}}
-
-    <img src="/media/{{cartao.imagem}}" alt="{{mensagem}}">
-
-    <pre id="resposta">
-        {{resposta}}
-    </pre>
-</div>
-
-    <input type="button" value="Ler" id="btnLer">
-    <button onclick="pararAudio()">Parar Audiodescrição</button>
-
     <script>
-        const synth = window.speechSynthesis;
-        const btnLer = document.getElementById("btnLer");
-        const texto = document.getElementById("resposta");
+        var video = document.querySelector('video');
 
-        btnLer.addEventListener("click", () => {
-        const estruturaParaFala = new SpeechSynthesisUtterance(texto.textContent);
-        synth.speak(estruturaParaFala);
-    });
-</script>
+        var canvas = document.querySelector('canvas');
+        var context = canvas.getContext('2d');
+
+        var imagemToUpload = document.querySelector("#imagemToUpload");
+        var btnTirarFoto = document.querySelector('#btnTirarFoto')
+
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(error => {
+                console.log(error);
+        })
+
+        btnTirarFoto.addEventListener('click', () => {
+            //Ajustar o tamanho do canva para armazenar a imagem.
+            canvas.height = video.videoHeight;
+            canvas.width = video.videoWidth;
+
+            //Salvar a imagem.
+            context.drawImage(video, 0, 0);
+            imagemToUpload.value = canvas.toDataURL("image/jpeg");
+        })
+    </script>
 </body>
 </html>
