@@ -24,4 +24,5 @@ urlpatterns = [
     path('', views.descricao, name="Descricao.html"),
     path('admin/', admin.site.urls),
     path('formulario/', views.formulario, name="formulario.html"),
+    path('ler_img/',views.ler_img, name="ler_img"),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
