@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +30,22 @@
 
         </pre>
     </div>
+    <script>
+        const synth = window.speechSynthesis;
+        const btnLer = document.getElementById("btnler");
+        const texto = document.getElementById("texto");
+
+        btnLer.addEventListener("click", () => {
+            const utterThis = new SpeechSynthesisUtterance(texto.value);
+            synth.speak(utterThis);
+
+            var btnLer = document.getElementById(texto.value);
+            var texto = btnLer.innerText;
+
+
+        });
+            
+    </script>
 
     
 </body>
