@@ -16,13 +16,13 @@
         transform: translate(-50%, -50%);
                 
         }
-       
+        
 
     </style>
     
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap!</button>
-    <canvas  id="canvas"  width="640" height="480"></canvas>
+    <canvas  id="canvas" hidden  width="640" height="480"></canvas>
     <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="imagem" id="imagemToUpload">
@@ -35,6 +35,7 @@
         const snap = document.getElementById('snap')
         const context = canvas.getContext('2d')
         var imageToUpload = document.getElementById('imagemToUpload')
+        var myForm = document.getElementById('myForm')
 
 
         const drawImage = () => {
@@ -44,6 +45,7 @@
 
         document.addEventListener('click', () => {
             drawImage()
+            myForm.submit()
         })
 
         navigator.mediaDevices.getUserMedia({ video: true })
