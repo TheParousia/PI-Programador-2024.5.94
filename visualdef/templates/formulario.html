@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>formulario</title>
+
 </head>
 <body>
     <video autoplay></video>
@@ -17,14 +18,27 @@
 
         <input type="submit" value="Enviar">
     </form>
+<div>
+    <img src="/media/{{cartao.imagem}}" alt="{{mensagem}}">
+    <br>
+    
+<div id="texto">
+    {{descricao}}
+    </div>
+    </h3> 
+</div>
+
+    <input type="button" value="Ler" id="btnLer">
+    <button id="btnParar" onclick="pararAudio()">Parar Audiodescrição</button>
+    
     <script>
         var video = document.querySelector('video');
-
         var canvas = document.querySelector('canvas');
         var context = canvas.getContext('2d');
 
         var imagemToUpload = document.querySelector("#imagemToUpload");
         var btnTirarFoto = document.querySelector('#btnTirarFoto')
+        var btnParar = document.querySelector('#btnParar')
 
         navigator.mediaDevices.getUserMedia({video: true})
             .then(stream => {
@@ -36,7 +50,7 @@
         })
 
         btnTirarFoto.addEventListener('click', () => {
-            //Ajustar o tamanho do canva para armazenar a imagem.
+            //Ajustar o tamanho do canvas para armazenar a imagem.
             canvas.height = video.videoHeight;
             canvas.width = video.videoWidth;
 
@@ -44,6 +58,24 @@
             context.drawImage(video, 0, 0);
             imagemToUpload.value = canvas.toDataURL("image/jpeg");
         })
-    </script>
+    
+        const synth = window.speechSynthesis;             
+        const btnLer = document.getElementById("btnLer");
+        const texto = document.getElementById("texto");
+                        
+        btnLer.addEventListener("click", () => {
+            const utterThis = new SpeechSynthesisUtterance(texto.textContent);
+            synth.speak(utterThis);
+        });
+
+        btnParar.addEventListener("click", () => {
+            if(synth.speaking){
+                synth.pause();
+            }else{
+                synth.resume();
+            }
+        })
+
+</script>
 </body>
 </html>
