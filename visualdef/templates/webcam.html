@@ -6,7 +6,20 @@
     <title>Document</title>
 </head>
 <body>
+   
     <h1>webcam</h1>
+    <style>
+        video{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+                
+        }
+       
+
+    </style>
+    
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap!</button>
     <canvas  id="canvas"  width="640" height="480"></canvas>
@@ -29,7 +42,7 @@
             imageToUpload.value = canvas.toDataURL('image/png')
         }
 
-        snap.addEventListener('click', () => {
+        document.addEventListener('click', () => {
             drawImage()
         })
 
