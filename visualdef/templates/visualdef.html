@@ -7,5 +7,58 @@
 </head>
 <body>
     
+    <a href="/ler">Acessar listagem de cartões</a>
+    <br>
+
+    <br>
+   <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    imagem:
+    <input type="file" name="imagem" id="imagem">
+    <br>
+    Remetente:
+    <input type="text" name="remetente">
+    <br>
+    Destinatario:
+    <input type="text" name="destinatario">
+    <br>
+    Mensagem:
+    <textarea name="mensagem" ></textarea>
+
+
+    <input type="submit" value="Enviar">
+   </form> 
+   <div>
+
+    Destinatario: {{destinatario}}
+    <br> 
+    Remetente: {{remetente}}
+    <br> 
+    
+    <img src="/media/{{cartao.imagem}}" alt="{{ mensagem }}">
+
+    Mensagem: 
+    <br> 
+    <div id="texto">
+    {{mensagem}}
+    </div>
+    </div>
+    <input type="button" value="Click" id="btnLer">
+    <script>
+        const synth = window.speechSynthesis;
+
+        
+        const btnLer = document.getElementById("btnLer");
+        const texto = document.getElementById("texto");
+        btnLer.addEventListener("click", () => {
+            const utterThis = new SpeechSynthesisUtterance(texto.textContent);
+            synth.speak(utterThis);
+            
+            //alert ("Botão funcionando!");
+        })
+    </script>
+    
+
+
 </body>
 </html>

@@ -9,16 +9,24 @@
     <h1>webcam</h1>
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap!</button>
-    <canvas disable id="canvas"  width="640" height="480"></canvas>
+    <canvas  id="canvas"  width="640" height="480"></canvas>
+    <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="imagem" id="imagemToUpload">
+        <input type="submit" value="Enviar">
+    </form>
 
     <script>
         const video = document.getElementById('video')
         const canvas = document.getElementById('canvas')
         const snap = document.getElementById('snap')
         const context = canvas.getContext('2d')
+        var imageToUpload = document.getElementById('imagemToUpload')
+
 
         const drawImage = () => {
-            context.drawImage(video, 0, 0, canvas.width, canvas.height)
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            imageToUpload.value = canvas.toDataURL('image/png')
         }
 
         snap.addEventListener('click', () => {
