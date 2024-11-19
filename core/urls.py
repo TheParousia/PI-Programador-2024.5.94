@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from django.conf import settings
 from django.conf.urls.static import static
 from visualdef import views
@@ -25,3 +26,20 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+from django.conf.urls.static import static
+from django.conf import settings
+from visualdef import views
+
+urlpatterns = [
+    path('',views.form_webcam, name="form_webcam"),
+    path('ler_img/',views.ler_img, name="ler_img"),
+    path('admin/', admin.site.urls),
+    path('formulario', views.formulario, name="formulario"),
+    path('form/', views.formularioenvio, name="formulario de envio"),
+    path('visualdef/', views.visualdef, name="visualdef_html"),
+    path('upload/', views.upload_imagem, name='upload_imagem'),
+    path('webcam/',views.webcam,name="webcam"),
+    path('ler_img/',views.ler_img, name="ler_img"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> main
