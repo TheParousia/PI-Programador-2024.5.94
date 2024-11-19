@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +17,17 @@
         <input type="hidden" name="imagem" id="imageToUpload">
 
         <input type="submit" value="enviar">
+        <input type="button" id="btnLer" value="Ler">
     </form>
+    <div>
+        Remetente recebido: {{remetente}}, 
+        resposta:
+        <div id="texto">
+            {{descricao}}
+            <br>
 
+        </div>
+    </div>
     <script>
         var video = document.querySelector('video');
 
@@ -45,8 +54,17 @@
         context.drawImage(video,0,0);
         imageToUpload.value = canvas.toDataURL("image/jpeg");
     });
-        
 
+    const synth = window.speechSynthesis;
+
+    const btnLer = document.getElementById('btnLer');
+    var texto = document.getElementById('texto');
+
+    btnLer.addEventListener('click', () => {
+        conteudo = texto.textContent;
+        var leitura = new SpeechSynthesisUtterance(conteudo);
+        synth.speak(leitura);
+    })
     </script>
 </body>
 </html>
