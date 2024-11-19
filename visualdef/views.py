@@ -179,9 +179,9 @@ def ler_img(request):
 
             mensagem = response.text
 
-        context = {"imagem": cartao.imagem, "texto": mensagem}
+        context = {"imagem": cartao.imagem, "descricao": mensagem}
 
-    return redirect("formulario")
+    return render(request, "formulario.html", context)
 
     
 def descricao(request):
