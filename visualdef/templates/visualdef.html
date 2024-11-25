@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam</title>
+</head>
+<body>
+<<<<<<<< HEAD:visualdef/templates/visualdef.html
+    abelha
+========
+  
+    <video autoplay></video>
+    <canvas></canvas>
+    <br>
+    <button id="bntTirarFoto">Tirar Foto</button>
+
+    <form id="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="imagem" id="imageToUpload">
+
+        <input type="submit" value="enviar">
+    </form>
+
+    <script>
+        var video = document.querySelector('video');
+
+        var canvas = document.querySelector('canvas');
+        var context = canvas.getContext('2d');
+
+        var imageToUpload = document.querySelector('input#imageToUpload');
+        var bntTirarFoto = document.querySelector('#bntTirarFoto');
+
+        navigator.mediaDevices.getUserMedia({ video: true }) 
+        .then(stream => {
+            video.srcObject = stream;
+            video.play(); 
+        })
+        .catch(error => {
+            console.log(error);
+        }
+    )
+
+    bntTirarFoto.addEventListener('click', () => {
+        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth;
+
+        context.drawImage(video,0,0);
+        imageToUpload.value = canvas.toDataURL("image/jpeg");
+    });
+        
+
+    </script>
+>>>>>>>> d2dc099f5e0d4ccc25b45f80411b379cd86e7216:visualdef.html
+=======
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <a href="/ler">Acessar listagem de cartões</a>
+    <br>
+
+    <br>
+   <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    imagem:
+    <input type="file" name="imagem" id="imagem">
+    <br>
+    Remetente:
+    <input type="text" name="remetente">
+    <br>
+    Destinatario:
+    <input type="text" name="destinatario">
+    <br>
+    Mensagem:
+    <textarea name="mensagem" ></textarea>
+
+
+    <input type="submit" value="Enviar">
+   </form> 
+   <div>
+
+    Destinatario: {{destinatario}}
+    <br> 
+    Remetente: {{remetente}}
+    <br> 
+    
+    <img src="/media/{{cartao.imagem}}" alt="{{ mensagem }}">
+
+    Mensagem: 
+    <br> 
+    <div id="texto">
+    {{mensagem}}
+    </div>
+    </div>
+    <input type="button" value="Click" id="btnLer">
+    <script>
+        const synth = window.speechSynthesis;
+
+        
+        const btnLer = document.getElementById("btnLer");
+        const texto = document.getElementById("texto");
+        btnLer.addEventListener("click", () => {
+            const utterThis = new SpeechSynthesisUtterance(texto.textContent);
+            synth.speak(utterThis);
+            
+            //alert ("Botão funcionando!");
+        })
+    </script>
+    
+
+
+>>>>>>> d2dc099f5e0d4ccc25b45f80411b379cd86e7216
+</body>
+</html>
