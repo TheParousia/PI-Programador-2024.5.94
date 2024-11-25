@@ -122,39 +122,24 @@
     <p>
     </p>   
     <script>
+        var falando = true;
+
         const synth = window.speechSynthesis;
         
-        const btnLer = document.getElementById("btnLer");
         const texto = document.getElementById("texto");
         
         const utterThis = new SpeechSynthesisUtterance(texto.textContent);
         synth.speak(utterThis);
         
-    </script>
-    <button id="btnParar">Parar</button>
-    <script>
-        const btnParar = document.getElementById("btnParar");
-        const synth1 = window.speechSynthesis;
-      
-        btnParar.addEventListener("click", () => {
-            synth.pause();
-        });
-
-    </script>
-    <button id="btnContinuar">Continuar</button>
-    <script>
-        const btnContinuar = document.getElementById("btnContinuar");
-        const texto2 = document.getElementById("texto");
-        const synth2 = window.speechSynthesis;
-        let utterThis2 = new SpeechSynthesisUtterance(texto2.textContent);
-        let currenPosition = 0;
-
-        btnContinuar.addEventListener("click", () => {
-            if (synth2.speaking) {
-                synth2.resume();
+        document.addEventListener("click", () => {
+            if (falando) {
+                synth.pause();
+                console.log("pausando");
+                falando = false;
             } else {
-            utterThis2 = new SpeechSynthesisUtterance(texto2.textContent.substring(currenPosition));
-            synth2.speak(utterThis2);
+                synth.resume();
+                console.log("resumindo");
+                falando = true;
             }
         }); 
     </script>
