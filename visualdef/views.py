@@ -1,3 +1,5 @@
+from .models import Meumodelo
+from .forms import MeuFormulario
 from .models import Cartao
 from django.shortcuts import render, redirect
 from django.core.files.base import ContentFile
@@ -6,58 +8,54 @@ import google.generativeai as genai
 import os
 import PIL.Image
 
-<<<<<<< HEAD
 # Create your views here.
-def sobreNos(request):
-    return render(request, 'sobre_nos2.html')
-=======
-from.models import visualdef,formularioenvio
-from.models import Meumodelo
-from .forms import MeuFormulario
+from .models import visualdef, formularioenvio
+
 
 def form_webcam(request):
-        return render(request, "form_webcam.html")
+    return render(request, "form_webcam.html")
+
 
 def ler_img(request):
-        context = {}
-        if request.method == 'POST':
-                img=request.POST.get('imagem')
+    context = {}
+    if request.method == 'POST':
+        img = request.POST.get('imagem')
 
-              
+        imgSerializedSplit = base64.b64decode(
+            img.split(',')[1]
+        )
 
-                imgSerializedSplit = base64.b64decode(
-                        img.split(',')[1]
-                )
+        request.FILES['imagem'] = ContentFile(
+            imgSerializedSplit, name='imgSerializedSplit.jpg'
+        )
 
-                request.FILES['imagem'] = ContentFile(
-                        imgSerializedSplit,name='imgSerializedSplit.jpg'
-                )
+        cartao = Cartao()
 
-                cartao = Cartao()
+        cartao.imagem = request.FILES['imagem']
 
-                cartao.imagem = request.FILES['imagem']
+        cartao.save()
 
-                cartao.save()
+        genai.configure(api_key="AIzaSyCrJHeuVlhGitTdgmnlDY_i7ETfiRMFTC0")
 
-                genai.configure(api_key="AIzaSyCrJHeuVlhGitTdgmnlDY_i7ETfiRMFTC0")
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        imagemCarreda = PIL.Image.open(cartao.imagem)
+        response = model.generate_content(
+            ["Gere um texto descrevendo a imagem, para uma pessoa cega: ", imagemCarreda])
+        print(response.text),
 
-                model = genai.GenerativeModel("gemini-1.5-flash")
-                imagemCarreda = PIL.Image.open(cartao.imagem)
-                response = model.generate_content(["Gere um texto descrevendo a imagem, para uma pessoa cega: ",imagemCarreda])
-                print(response.text),
+        mensagem = response.text
 
-                mensagem = response.text
+        context = {
+            "descricao": mensagem,
+            "resposta": cartao,
+        }
 
-                context = {
-                "descricao":mensagem,
-                "resposta": cartao,
-                }
+    return render(request, "form_webcam.html", context)
 
-        
 
-        return render(request, "form_webcam.html", context)
 def formulario(request):
     return render(request, "formulario.html")
+
 
 def ler_img(request):
 
@@ -72,47 +70,48 @@ def ler_img(request):
 
         # Armazenando a imagem.
         request.FILES["imagem"] = ContentFile(
-            imgSerializedSplited, name = 'imgSerializedSplited.jpg')
-        
+            imgSerializedSplited, name='imgSerializedSplited.jpg')
+
         cartao = Cartao()
 
-def formularioenvio(request):
-    return render(request,"formularioenvio")
 
 def formularioenvio(request):
-    comando=request.GET.get("comando")
-   
-    if comando!=None:
-        #criação do objeto usando a classe cartão
-        visualdef=visualdef()
-        #Uso dos dados vindo do front-end
-        #para preencher o objeto cartão
-        formularioenvio.comando=comando
-        
+    return render(request, "formularioenvio")
+
+
+def formularioenvio(request):
+    comando = request.GET.get("comando")
+
+    if comando != None:
+        # criação do objeto usando a classe cartão
+        visualdef = visualdef()
+        # Uso dos dados vindo do front-end
+        # para preencher o objeto cartão
+        formularioenvio.comando = comando
+
         visualdef.visualdef()
 
-    contexto={
-        "comando":comando,
-        
+    contexto = {
+        "comando": comando,
+
     }
 
+    return render(request, "visualdef.html", contexto)
 
-    return render(request,"visualdef.html",contexto)
-    
 
 def formularioenvio(request):
-    return render(request,"visualdef.html")
+    return render(request, "visualdef.html")
+
 
 def comando(request):
-    comando=request.GET.get("comando")
-    
+    comando = request.GET.get("comando")
 
-    contexto={
-        "comando":comando,
-        
+    contexto = {
+        "comando": comando,
+
     }
 
-    return render(request,"visualdef.html", contexto)
+    return render(request, "visualdef.html", contexto)
 
 
 def upload_imagem(request):
@@ -124,8 +123,12 @@ def upload_imagem(request):
     else:
         form = MeuFormulario()
     return render(request, 'meu_template.html', {'form': form})
+
+
 def webcam(request):
-    return render(request,"webcam.html")
+    return render(request, "webcam.html")
+
+
 def visualdef(request):
     if request.method == 'POST':
         form = MeuFormulario(request.POST, request.FILES)
@@ -135,8 +138,9 @@ def visualdef(request):
     else:
         form = MeuFormulario()
 
+    return render(request, "visualdef.html")
 
-    return render(request,"visualdef.html")
+
 def ler_img(request):
     context = {}
     if request.method == 'POST':
@@ -146,23 +150,19 @@ def ler_img(request):
         print(imgSerialSplited)
 
         request.FILES["imagem"] = ContentFile(
-            imgSerialSplited,name='imgSerialSplitedSplited.jpg'
+            imgSerialSplited, name='imgSerialSplitedSplited.jpg'
 
         )
         cartao = Meumodelo()
-
 
         cartao.imagem = request.FILES["imagem"]
         cartao.remetente = ""
         cartao.destinatario = ""
         cartao.mensagem = ""
 
-
         cartao.save()
-    
-        # Código para carregar a imagem no gemini.
 
-    
+        # Código para carregar a imagem no gemini.
 
         # Código para salvar a imagem
         if "imagem" in request.FILES:
@@ -179,7 +179,8 @@ def ler_img(request):
 
             model = genai.GenerativeModel("gemini-1.5-flash")
             imagemCarregada = PIL.Image.open(cartao.imagem)
-            response = model.generate_content(["Gere um texto descrevendo a imagem para uma pessoa cega: \n", imagemCarregada])
+            response = model.generate_content(
+                ["Gere um texto descrevendo a imagem para uma pessoa cega: \n", imagemCarregada])
             print(response.text)
 
             mensagem = response.text
@@ -188,7 +189,10 @@ def ler_img(request):
 
     return render(request, "formulario.html", context)
 
-    
+
 def descricao(request):
     return redirect("webcam")
->>>>>>> main
+
+
+def sobreNos(request):
+    return render(request, 'sobre_nos2.html')
