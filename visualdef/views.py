@@ -8,9 +8,6 @@ import google.generativeai as genai
 import os
 import PIL.Image
 
-# Create your views here.
-from .models import visualdef, formularioenvio
-
 
 def form_webcam(request):
     return render(request, "form_webcam.html")
