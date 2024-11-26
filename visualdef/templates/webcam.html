@@ -4,35 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        body {
+            background-color:  #6a7374; /* cor de fundo cinza claro */
+        }
+
+        video{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #titulo{
+            text-align: center;
+            font-size: 130px;
+            font-family: 'Montserrat', sans-serif;
+            color:rgb(22, 22, 194)
+        }
+    </style>  
+ 
 </head>
 <body>
    
-    <h1>webcam</h1>
-    <style>
-        video{
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-                
-        }
-        
+   
+    <h1 id="titulo">webcam</h1>
 
-    </style>
+
     
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap!</button>
     <canvas  id="canvas" hidden  width="640" height="480"></canvas>
     <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="imagem" id="imagemToUpload">
-        <input type="submit" value="Enviar">
+
     </form>
 
     <script>
         const video = document.getElementById('video')
         const canvas = document.getElementById('canvas')
-        const snap = document.getElementById('snap')
         const context = canvas.getContext('2d')
         var imageToUpload = document.getElementById('imagemToUpload')
         var myForm = document.getElementById('myForm')

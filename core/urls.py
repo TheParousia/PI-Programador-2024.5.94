@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from visualdef import views
 
 urlpatterns = [
-    path('', views.form_webcam, name="form_webcam"),
+    path('', views.webcam, name="form_webcam"),
     path('ler_img/', views.ler_img, name="ler_img"),
     path('admin/', admin.site.urls),
     path('formulario', views.formulario, name="formulario"),
