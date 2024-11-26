@@ -53,7 +53,6 @@ def ler_img(request):
 def formulario(request):
     return render(request, "formulario.html")
 
-
 def formularioenvio(request):
     return render(request, "formularioenvio")
 
@@ -141,7 +140,6 @@ def webcam(request):
         }
 
     return render(request, "webcam.html", context)
-
 
 def visualdef(request):
     if request.method == 'POST':
