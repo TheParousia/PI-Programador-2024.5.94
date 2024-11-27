@@ -37,7 +37,7 @@ def ler_img(request):
         model = genai.GenerativeModel("gemini-1.5-flash")
         imagemCarreda = PIL.Image.open(cartao.imagem)
         response = model.generate_content(
-            ["Gere um texto descrevendo a imagem, para uma pessoa cega: ", imagemCarreda])
+            ["faça apenas a descrição da imagem,sem responder que sim", imagemCarreda])
         print(response.text),
 
         mensagem = response.text
@@ -153,7 +153,7 @@ def visualdef(request):
     return render(request, "visualdef.html")
 
 
-def ler_img(request):
+def ler(request):
     context = {}
     if request.method == 'POST':
         img = request.POST.get('imagem')
