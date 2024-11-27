@@ -4,16 +4,15 @@ from django.core.files.base import ContentFile
 import base64
 import google.generativeai as genai
 import os
-import PIL.Image
+import PIL.Image 
 
-<<<<<<< HEAD
 # Create your views here.
-def sobreNos(request):
-    return render(request, 'sobre_nos2.html')
-=======
-from.models import visualdef,formularioenvio
+
 from.models import Meumodelo
 from .forms import MeuFormulario
+
+def sobreNos(request):
+    return render(request, 'sobre_nos2.html')
 
 def form_webcam(request):
         return render(request, "form_webcam.html")
@@ -191,4 +190,3 @@ def ler_img(request):
     
 def descricao(request):
     return redirect("webcam")
->>>>>>> main
