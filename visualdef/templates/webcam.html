@@ -29,10 +29,12 @@
         <input type="submit" value="Enviar">
     </form>
 
+    
+
     <script>
         const video = document.getElementById('video')
         const canvas = document.getElementById('canvas')
-        const snap = document.getElementById('snap')
+
         const context = canvas.getContext('2d')
         var imageToUpload = document.getElementById('imagemToUpload')
         var myForm = document.getElementById('myForm')
@@ -56,7 +58,23 @@
             .catch(err => {
                 console.error(err)
             })
-        
+        navigator.mediaDevices.getUserMedia({
+            video: {
+            facingMode: 'environment'
+            }
+            })
+            .then(stream => {
+            video.srcObject = stream
+            video.play()
+            })
+            .catch(err => {
+            if (err.name === 'NotAllowedError') {
+            console.log('O usuário não concedeu permissão para acessar a câmera.')
+            } else {
+            console.error(err)
+            }
+            })
+
         
 
     </script>
