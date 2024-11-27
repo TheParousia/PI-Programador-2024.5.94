@@ -82,8 +82,12 @@ MEDIA_URL = '/media/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':"teste",
+        'USER': "visualdef",
+        'PASSWORD': "qwer1234",
+        'HOST': "172.16.0.114",
+        'PORT': "3306",
     }
 }
 
