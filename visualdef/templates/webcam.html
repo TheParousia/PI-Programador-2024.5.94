@@ -41,6 +41,8 @@
 
     </form>
 
+    
+
     <script>
         const video = document.getElementById('video')
         const canvas = document.getElementById('canvas')
@@ -67,7 +69,23 @@
             .catch(err => {
                 console.error(err)
             })
-        
+        navigator.mediaDevices.getUserMedia({
+            video: {
+            facingMode: 'environment'
+            }
+            })
+            .then(stream => {
+            video.srcObject = stream
+            video.play()
+            })
+            .catch(err => {
+            if (err.name === 'NotAllowedError') {
+            console.log('O usuário não concedeu permissão para acessar a câmera.')
+            } else {
+            console.error(err)
+            }
+            })
+
         
 
     </script>
