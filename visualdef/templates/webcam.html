@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="titulo">webcam</h1>
 
     <style>
         body {
@@ -16,32 +22,23 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
+      
         #titulo{
             text-align: center;
             font-size: 130px;
             font-family: 'Montserrat', sans-serif;
             color:rgb(22, 22, 194)
         }
-    </style>  
- 
-</head>
-<body>
-   
-   
-    <h1 id="titulo">webcam</h1>
+    </style>
 
-
-    
     <video id="video" width="640" height="480" autoplay></video>
     <canvas  id="canvas" hidden  width="640" height="480"></canvas>
     <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="imagem" id="imagemToUpload">
-
     </form>
 
-    
+
 
     <script>
         const video = document.getElementById('video')
@@ -56,38 +53,72 @@
             imageToUpload.value = canvas.toDataURL('image/png')
         }
 
-        document.addEventListener('click', () => {
-            drawImage()
-            myForm.submit()
-        })
+        // document.addEventListener('click', () => {
+        //     drawImage()
+        //     myForm.submit()
+        // })
 
-        navigator.mediaDevices.getUserMedia({ video: true })
+        // navigator.mediaDevices.getUserMedia({ video: true })
+        //     .then(stream => {
+        //         video.srcObject = stream
+        //         video.play()
+        //     })
+        //     .catch(err => {
+        //         console.error(err)
+        //     })
+
+        navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: 'environment'
+            }
+        })
             .then(stream => {
                 video.srcObject = stream
                 video.play()
             })
             .catch(err => {
-                console.error(err)
-            })
-        navigator.mediaDevices.getUserMedia({
-            video: {
-            facingMode: 'environment'
-            }
-            })
-            .then(stream => {
-            video.srcObject = stream
-            video.play()
-            })
-            .catch(err => {
-            if (err.name === 'NotAllowedError') {
-            console.log('O usuário não concedeu permissão para acessar a câmera.')
-            } else {
-            console.error(err)
-            }
+                if (err.name === 'NotAllowedError') {
+                    console.log('O usuário não concedeu permissão para acessar a câmera.')
+                } else {
+                    console.error(err)
+                }
             })
 
-        
+        document.addEventListener('dblclick', function () {
+            switchCamera();
+        });
 
+        let currentCamera = null;
+
+        function switchCamera() {
+            navigator.mediaDevices.enumerateDevices()
+                .then(devices => {
+                    const cameras = devices.filter(device => device.kind === 'videoinput');
+                    if (cameras.length > 1) {
+                        if (currentCamera === null) {
+                            currentCamera = cameras[0].deviceId;
+                        } else {
+                            const currentIndex = cameras.findIndex(camera => camera.deviceId === currentCamera);
+                            const nextIndex = (currentIndex + 1) % cameras.length;
+                            currentCamera = cameras[nextIndex].deviceId;
+                        }
+                        
+                        navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: currentCamera } } })
+                            .then(stream => {
+                                const video = document.querySelector('video');
+                                video.srcObject = stream;
+                                video.play();
+                            })
+                            .catch(err => {
+                                alert('Erro ao acessar a câmera:', err);
+                            });
+                    }
+                })
+                .catch(err => {
+                    alert('Erro ao enumerar dispositivos de mídia:', err);
+                });
+        }
     </script>
 </body>
+
 </html>
