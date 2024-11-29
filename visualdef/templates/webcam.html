@@ -45,10 +45,10 @@
             imageToUpload.value = canvas.toDataURL('image/png')
         }
 
-        // document.addEventListener('click', () => {
-        //     drawImage()
-        //     myForm.submit()
-        // })
+        document.addEventListener('dblclick', () => {
+            drawImage()
+            myForm.submit()
+        })
 
         // navigator.mediaDevices.getUserMedia({ video: true })
         //     .then(stream => {
@@ -74,11 +74,18 @@
                 } else {
                     console.error(err)
                 }
-            })
+            });
 
-        document.addEventListener('dblclick', function () {
-            switchCamera();
-        });
+
+
+            document.addEventListener('touchmove', function(event) {
+                switchCamera();
+            });
+
+            document.addEventListener('drag', function(event) {
+                switchCamera();
+            });
+                            
 
         let currentCamera = null;
 
@@ -108,7 +115,7 @@
                 })
                 .catch(err => {
                     alert('Erro ao enumerar dispositivos de mídia:', err);
-                });
+                })
         }
     </script>
 </body>
