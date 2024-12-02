@@ -29,6 +29,10 @@
         <input type="submit" value="Enviar">
     </form>
 
+    <div id="descricao">
+        {{olá, testando som}} 
+    </div>
+
     <script>
         const video = document.getElementById('video')
         const canvas = document.getElementById('canvas')
@@ -57,8 +61,10 @@
                 console.error(err)
             })
         
-        
-
+        const synth = window.speechSynthesis;
+        const descricao = document.getElementById("descricao");
+        const utterThis = new SpeechSynthesisUtterance(descricao.textContent);
+        synth.speak(utterThis);
     </script>
 </body>
 </html>

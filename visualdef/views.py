@@ -54,7 +54,9 @@ def ler_img(request):
 
         
 
-        return render(request, "form_webcam.html", context)
+        return render(request, "webcam.html", context)
+
+
 def formulario(request):
     return render(request, "formulario.html")
 
@@ -125,6 +127,7 @@ def upload_imagem(request):
     return render(request, 'meu_template.html', {'form': form})
 def webcam(request):
     return render(request,"webcam.html")
+
 def visualdef(request):
     if request.method == 'POST':
         form = MeuFormulario(request.POST, request.FILES)

@@ -94,23 +94,18 @@
 
     Mensagem: 
     <br> 
-    <div id="texto">
-    {{mensagem}}
+    <div id="descricao">
+    {{descricao}}
     </div>
     </div>
-    <input type="button" value="Click" id="btnLer">
     <script>
         const synth = window.speechSynthesis;
 
-        
-        const btnLer = document.getElementById("btnLer");
-        const texto = document.getElementById("texto");
-        btnLer.addEventListener("click", () => {
-            const utterThis = new SpeechSynthesisUtterance(texto.textContent);
-            synth.speak(utterThis);
+        const descricao = document.getElementById("descricao");
+        const utterThis = new SpeechSynthesisUtterance(texto.textContent);
+        synth.speak(utterThis);
             
             //alert ("Botão funcionando!");
-        })
     </script>
     
 
