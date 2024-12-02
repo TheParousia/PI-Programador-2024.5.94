@@ -17,6 +17,21 @@ def ler_img(request):
     context = {}
     if request.method == 'POST':
         img = request.POST.get('imagem')
+   
+        tipodescricao = '1'
+
+        prompt = "faça apenas a descrição da imagem,sem responder que sim."
+
+    
+        if tipodescricao=='1': 
+            prompt = "Faça apenas a descriçao capturada."
+        
+        elif tipodescricao=='2': 
+            prompt = "Descreva o valor total das cedulas ou moedas."
+        
+        elif tipodescricao=='3': 
+            prompt = "Faca apenas a descricao das pessoas detalhada."
+        
 
         imgSerializedSplit = base64.b64decode(
             img.split(',')[1]
@@ -37,7 +52,7 @@ def ler_img(request):
         model = genai.GenerativeModel("gemini-1.5-flash")
         imagemCarreda = PIL.Image.open(cartao.imagem)
         response = model.generate_content(
-            ["faça apenas a descrição da imagem,sem responder que sim.", imagemCarreda])
+            [prompt, imagemCarreda])
         print(response.text),
 
         mensagem = response.text
