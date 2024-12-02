@@ -37,7 +37,7 @@ def ler_img(request):
         model = genai.GenerativeModel("gemini-1.5-flash")
         imagemCarreda = PIL.Image.open(cartao.imagem)
         response = model.generate_content(
-            ["faça apenas a descrição da imagem,sem responder que sim", imagemCarreda])
+            ["faça apenas a descrição da imagem,sem responder que sim.", imagemCarreda])
         print(response.text),
 
         mensagem = response.text
