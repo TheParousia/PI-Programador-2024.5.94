@@ -6,31 +6,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<body>
-
-    <h1 id="titulo">webcam</h1>
 
     <style>
-        body {
-            background-color:  #6a7374; /* cor de fundo cinza claro */
-        }
-
+     
         video{
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -40%);
         }
       
         #titulo{
             text-align: center;
-            font-size: 130px;
-            font-family: 'Montserrat', sans-serif;
-            color:rgb(22, 22, 194)
+            font-size: 40px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color:'Times New Roman', Times, serif 
         }
-    </style>
+
+        .ico-center{
+            text-align: center;
+            color: rgb(23, 39, 65);
+        }
+        
+        body, ul li{background-color: rgb(68, 76, 87) !important;
+        }
+      
+        h1{
+            color: rgb(17, 16, 16);
+            background-color:rgb(39, 189, 216);
+        }
+      
+    </style>  
+ 
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Inicialização"><use xlink:href="#bootstrap"></use></svg>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a href="#" class="nav-link text-secondary">
+                <i class="bi bi-qr-code-scan"></i>
+                <br>
+                QRCode
+                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                </font></font></a>
+              </li>
+              <li>
+                <a href="#" class="nav-link text-white">
+                  <i class="bi bi-cash-coin"></i>
+                  <br>
+                  Cash
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  </font></font></a>
+                </li>
+              <li>
+                <a href="#" class="nav-link text-white">
+                  <i class="bi bi-geo-alt"></i>
+                  <br>
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  Pessoas
+              </font></font></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+   
+    <h1 id="titulo">VISUALDEF</h1>
 
     <video id="video" width="640" height="480" autoplay></video>
     <canvas  id="canvas" hidden  width="640" height="480"></canvas>
@@ -48,7 +96,15 @@
         const context = canvas.getContext('2d')
         var imageToUpload = document.getElementById('imagemToUpload')
         var myForm = document.getElementById('myForm')
+        
+     
+        
 
+/**
+
+ * salvando o resultado em imageToUpload.
+ * @function drawImage
+ */
 
         const drawImage = () => {
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
