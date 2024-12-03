@@ -144,7 +144,7 @@ def webcam(request):
         model = genai.GenerativeModel("gemini-1.5-flash")
         imagemCarreda = PIL.Image.open(cartao.imagem)
         response = model.generate_content(
-            ["Gere um texto descrevendo a imagem, para uma pessoa cega: ", imagemCarreda])
+            ["Fça apenas a descrição da imagem: ", imagemCarreda])
         print(response.text),
 
         mensagem = response.text
