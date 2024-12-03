@@ -24,7 +24,7 @@ def ler_img(request):
 
     
         if tipodescricao=='1': 
-            prompt = "Faça apenas a descriçao capturada."
+            prompt = "Faça a descriçao detalhada da imagem capturada."
         
         elif tipodescricao=='2': 
             prompt = "Descreva o valor total das cedulas ou moedas."
@@ -144,7 +144,7 @@ def webcam(request):
         model = genai.GenerativeModel("gemini-1.5-flash")
         imagemCarreda = PIL.Image.open(cartao.imagem)
         response = model.generate_content(
-            ["Fça apenas a descrição da imagem: ", imagemCarreda])
+            ["Faça a descrição completa da imagem: ", imagemCarreda])
         print(response.text),
 
         mensagem = response.text
@@ -207,7 +207,7 @@ def ler(request):
             model = genai.GenerativeModel("gemini-1.5-flash")
             imagemCarregada = PIL.Image.open(cartao.imagem)
             response = model.generate_content(
-                ["Gere um texto descrevendo a imagem para uma pessoa cega: \n", imagemCarregada])
+                ["Faça a descrição completa da imagem: \n", imagemCarregada])
             print(response.text)
 
             mensagem = response.text
