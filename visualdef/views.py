@@ -18,7 +18,7 @@ def ler_img(request):
     if request.method == 'POST':
         img = request.POST.get('imagem')
    
-        tipodescricao = '1'
+        tipodescricao =  request.POST.get('tipodescricao')
 
         prompt = "faça apenas a descrição da imagem,sem responder que sim."
 
@@ -30,7 +30,7 @@ def ler_img(request):
             prompt = "Descreva o valor total das cedulas ou moedas."
         
         elif tipodescricao=='3': 
-            prompt = "Faca apenas a descricao das pessoas detalhada."
+            prompt = "Faça apenas a descricao das pessoas detalhada."
         
 
         imgSerializedSplit = base64.b64decode(
