@@ -47,15 +47,15 @@
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="#" class="nav-link text-secondary">
-                <i class="bi bi-qr-code-scan"></i>
+              <a id="btnNormal" href="#" class="nav-link text-secondary">
+                <i class="bi bi-image"></i>
                 <br>
-                QRCode
+                Normal
                 <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                 </font></font></a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a id="btnCash" href="#" class="nav-link text-white">
                   <i class="bi bi-cash-coin"></i>
                   <br>
                   Cash
@@ -63,8 +63,8 @@
                   </font></font></a>
                 </li>
               <li>
-                <a href="#" class="nav-link text-white">
-                  <i class="bi bi-geo-alt"></i>
+                <a id="btnPessoas" href="#" class="nav-link text-white">
+                  <i class="bi bi-person-standing"></i>
                   <br>
                   <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                   Pessoas
@@ -76,14 +76,13 @@
    
     <h1 id="titulo">VISUALDEF</h1>
 
-
     
     <video id="video" width="640" height="480" autoplay></video>
     <canvas  id="canvas" hidden  width="640" height="480"></canvas>
     <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" name="imagem" id="imagemToUpload">
-
+      {% csrf_token %}
+      <input type="hidden" name="imagem" id="imagemToUpload">
+      <input type="hidden" name="tipodescricao" id="tipoDescricao">
     </form>
 
     
@@ -94,50 +93,84 @@
         const context = canvas.getContext('2d')
         var imageToUpload = document.getElementById('imagemToUpload')
         var myForm = document.getElementById('myForm')
+
+        const btnNormal = document.getElementById('btnNormal')
+        const btnCash = document.getElementById('btnCash')
+        const btnPessoas = document.getElementById('btnPessoas')
         
-     
-        
-
-/**
-
- * salvando o resultado em imageToUpload.
- * @function drawImage
- */
-
         const drawImage = () => {
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             imageToUpload.value = canvas.toDataURL('image/png')
         }
 
-        document.addEventListener('click', () => {
+        document.addEventListener('dblclick', () => {
             drawImage()
             myForm.submit()
         })
 
+        var numeroBtnAtual = 1;
+        const tipoDescricao = document.getElementById('tipoDescricao')
+
+        document.addEventListener('click', () => {
+          if (numeroBtnAtual == 3) {
+            numeroBtnAtual = 1;
+            
+            // Mudar a cor do botão selecionado
+            btnPessoas.classList.add('text-white')
+            btnPessoas.classList.remove('text-secondary')
+            
+            btnNormal.classList.add('text-secondary')
+            btnNormal.classList.remove('text-white')
+          }else if (numeroBtnAtual == 2) {
+            numeroBtnAtual = 3;
+            
+            // Mudar a cor do botão selecionado
+            btnCash.classList.add('text-white')
+            btnCash.classList.remove('text-secondary')
+            
+            btnPessoas.classList.add('text-secondary')
+            btnPessoas.classList.remove('text-white')
+          }else if (numeroBtnAtual == 1) {
+            numeroBtnAtual = 2;
+            
+            // Mudar a cor do botão selecionado
+            btnNormal.classList.add('text-white')
+            btnNormal.classList.remove('text-secondary')
+            
+            btnCash.classList.add('text-secondary')
+            btnCash.classList.remove('text-white')
+          }
+          
+          tipoDescricao.value = numeroBtnAtual;
+
+
+        })
+        
         navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                video.srcObject = stream
-                video.play()
+        .then(stream => {
+          video.srcObject = stream
+          video.play()
             })
             .catch(err => {
-                console.error(err)
+              console.error(err)
             })
-        navigator.mediaDevices.getUserMedia({
-            video: {
-            facingMode: 'environment'
-            }
-            })
-            .then(stream => {
-            video.srcObject = stream
-            video.play()
-            })
-            .catch(err => {
-            if (err.name === 'NotAllowedError') {
-            console.log('O usuário não concedeu permissão para acessar a câmera.')
-            } else {
-            console.error(err)
-            }
-            })
+
+        // navigator.mediaDevices.getUserMedia({
+        //     video: {
+        //     facingMode: 'environment'
+        //     }
+        //     })
+        //     .then(stream => {
+        //     video.srcObject = stream
+        //     video.play()
+        //     })
+        //     .catch(err => {
+        //     if (err.name === 'NotAllowedError') {
+        //     console.log('O usuário não concedeu permissão para acessar a câmera.')
+        //     } else {
+        //     console.error(err)
+        //     }
+        //     })
 
         
 
