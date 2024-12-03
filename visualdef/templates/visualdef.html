@@ -13,12 +13,17 @@
     <br>
     <button id="bntTirarFoto">Tirar Foto</button>
 
-    <form id="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
+    <f,0orm id="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="imagem" id="imageToUpload">
 
         <input type="submit" value="enviar">
     </form>
+    
+    <audio src="{% static 'audios/Audio1.mp3' %}" id="Audio1" autoplay></audio>
+    <audio src="{% static 'audios/Audio2.mp3' %}" id="Audio2" autoplay></audio>
+    <audio src="{% static 'audios/Audio3.mp3' %}" id="Audio3" autoplay></audio>
+
 
     <script>
         var video = document.querySelector('video');

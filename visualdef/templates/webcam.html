@@ -80,21 +80,12 @@
    
     <h1 id="titulo">VISUALDEF</h1>
 
-<<<<<<< HEAD
-    
     <video id="video" width="640" height="480" autoplay></video>
     <canvas  id="canvas" hidden  width="640" height="480"></canvas>
     <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <input type="hidden" name="imagem" id="imagemToUpload">
       <input type="hidden" name="tipodescricao" id="tipoDescricao">
-=======
-    <video id="video" width="640" height="480" autoplay></video>
-    <canvas  id="canvas" hidden  width="640" height="480"></canvas>
-    <form id ="myForm" action="/ler_img/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" name="imagem" id="imagemToUpload">
->>>>>>> b2911c3a2229dab7ba5b712529b383ebd61a512d
     </form>
 
 
@@ -116,7 +107,7 @@
             imageToUpload.value = canvas.toDataURL('image/png')
         }
 
-<<<<<<< HEAD
+
         document.addEventListener('dblclick', () => {
             drawImage()
             myForm.submit()
@@ -186,12 +177,7 @@
         //     }
         //     })
 
-        
-=======
-        // document.addEventListener('click', () => {
-        //     drawImage()
-        //     myForm.submit()
-        // })
+       
 
         // navigator.mediaDevices.getUserMedia({ video: true })
         //     .then(stream => {
@@ -218,11 +204,6 @@
                     console.error(err)
                 }
             })
-
-        document.addEventListener('dblclick', function () {
-            switchCamera();
-        });
->>>>>>> b2911c3a2229dab7ba5b712529b383ebd61a512d
 
         let currentCamera = null;
 
