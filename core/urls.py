@@ -22,7 +22,7 @@ from visualdef import views
 
 urlpatterns = [
     path('', views.webcam, name="webcam"),
-    path('admin/', admin.site.urls),
     path('ler_img/', views.ler_img, name="ler_img"),
     path('sobre_nos/', views.sobreNos, name='sobre_nos'),
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
