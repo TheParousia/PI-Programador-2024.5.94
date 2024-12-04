@@ -88,8 +88,8 @@
       <input type="hidden" name="tipodescricao" id="tipoDescricao">
     </form>
 
-    <div id="descricao">
-        {{descricao}} 
+    <div id="descricao"> 
+        {{descricao}}        
     </div>
 
     <audio src="{% static 'audios/audio1.mp3' %}" id="audio1" autoplay></audio>
@@ -109,7 +109,6 @@
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             imageToUpload.value = canvas.toDataURL('image/png')
         }
-
 
         document.addEventListener('dblclick', () => {
             drawImage()
@@ -206,7 +205,17 @@
                 } else {
                     console.error(err)
                 }
-            })
+            });
+
+
+
+            document.addEventListener('touchmove', function(event) {
+                switchCamera();
+            });
+
+            document.addEventListener('drag', function(event) {
+                switchCamera();
+            });
         
         const synth = window.speechSynthesis;
         const descricao = document.getElementById("descricao");
@@ -241,7 +250,7 @@
                 })
                 .catch(err => {
                     alert('Erro ao enumerar dispositivos de mídia:', err);
-                });
+                })
         }
 
     </script>
