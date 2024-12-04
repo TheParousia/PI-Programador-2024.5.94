@@ -6,8 +6,14 @@ from django.core.files.base import ContentFile
 import base64
 import google.generativeai as genai
 import os
-import PIL.Image
+import PIL.Image 
 
+from.models import Meumodelo
+from .forms import MeuFormulario
+
+
+def sobreNos(request):
+    return render(request, 'sobre_nos2.html')
 
 def form_webcam(request):
     return render(request, "form_webcam.html")
@@ -62,8 +68,11 @@ def ler_img(request):
             "resposta": cartao,
         }
 
-    return render(request, "form_webcam.html", context)
+        return render(request, "webcam.html", context)
 
+
+def formulario(request):
+    return render(request, "formulario.html")
 
 def formulario(request):
     return render(request, "formulario.html")
@@ -119,42 +128,7 @@ def upload_imagem(request):
 
 
 def webcam(request):
-
-    context = {}
-
-    if request.method == 'POST':
-        img = request.POST.get('imagem')
-
-        imgSerializedSplit = base64.b64decode(
-            img.split(',')[1]
-        )
-
-        request.FILES['imagem'] = ContentFile(
-            imgSerializedSplit, name='imgSerializedSplit.jpg'
-        )
-
-        cartao = Cartao()
-
-        cartao.imagem = request.FILES['imagem']
-
-        cartao.save()
-
-        genai.configure(api_key="AIzaSyCrJHeuVlhGitTdgmnlDY_i7ETfiRMFTC0")
-
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        imagemCarreda = PIL.Image.open(cartao.imagem)
-        response = model.generate_content(
-            ["Faça a descrição completa da imagem: ", imagemCarreda])
-        print(response.text),
-
-        mensagem = response.text
-
-        context = {
-            "descricao": mensagem,
-            "resposta": cartao,
-        }
-
-    return render(request, "webcam.html", context)
+    return render(request,"webcam.html")
 
 def visualdef(request):
     if request.method == 'POST':
@@ -219,7 +193,3 @@ def ler(request):
 
 def descricao(request):
     return redirect("webcam")
-
-
-def sobreNos(request):
-    return render(request, 'sobre_nos2.html')

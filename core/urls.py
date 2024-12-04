@@ -23,12 +23,6 @@ from visualdef import views
 urlpatterns = [
     path('', views.webcam, name="webcam"),
     path('ler_img/', views.ler_img, name="ler_img"),
-    path('admin/', admin.site.urls),
-    path('formulario', views.formulario, name="formulario"),
-    path('form/', views.formularioenvio, name="formulario de envio"),
-    path('visualdef/', views.visualdef, name="visualdef_html"),
-    path('upload/', views.upload_imagem, name='upload_imagem'),
-    path('form_webcam/', views.form_webcam, name="form_webcam"),
-    path('ler_img/', views.ler_img, name="ler_img"),
     path('sobre_nos/', views.sobreNos, name='sobre_nos'),
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

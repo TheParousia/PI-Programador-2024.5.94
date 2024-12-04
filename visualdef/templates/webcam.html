@@ -88,9 +88,12 @@
       <input type="hidden" name="tipodescricao" id="tipoDescricao">
     </form>
 
+    <div id="descricao">
+        {{descricao}} 
+    </div>
 
     <audio src="{% static 'audios/audio1.mp3' %}" id="audio1" autoplay></audio>
-
+  
     <script>
         const video = document.getElementById('video')
         const canvas = document.getElementById('canvas')
@@ -204,6 +207,11 @@
                     console.error(err)
                 }
             })
+        
+        const synth = window.speechSynthesis;
+        const descricao = document.getElementById("descricao");
+        const utterThis = new SpeechSynthesisUtterance(descricao.textContent);
+        synth.speak(utterThis);
 
         let currentCamera = null;
 
@@ -235,6 +243,7 @@
                     alert('Erro ao enumerar dispositivos de mídia:', err);
                 });
         }
+
     </script>
 </body>
 

@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre nós</title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<style>
+    body,
+    ul li {
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    h1 {
+        color: rgb(255, 255, 255);
+        background-color: royalblue;
+    }
+
+    #logo01 {
+        width: 370px;
+        height: 315px;
+    }
+
+    #logo001 {
+        width: 375px;
+        height: 315px;
+    }
+
+    #logo02 {
+        width: 370px;
+        height: 315px;
+    }
+
+    #logo {
+        width: 370px;
+        height: 315px;
+    }
+
+    #logo2 {
+        width: 370px;
+        height: 315px;
+    }
+
+    #logo3 {
+        width: 370px;
+        height: 315px;
+    }
+
+    #logo03 {
+        width: 370px;
+        height: 315px;
+    }
+</style>
+
+<body>
+    <div id="texto">
+        <p> <B>
+                <h1>
+                    <center>Sobre Nós</center> <br>
+                </h1>
+                <div style="padding: 20px;">
+                    <h3> <I>&emsp;Objetivo?</I> <br></h3>
+                    Objetivo do PI é desenvolver um sistema responsável de dar mais acessibilidade a pessoas com
+                    deficiência visual.
+                    Com a ajuda de uma IA (Inteligência Artificial), será desenvolvido um <BR>sistema onde pessoas com
+                    deficiência visual
+                    consiga fazer de uma forma independente tarefas do dia a dia.</p><br>
+
+        <h4><I>&emsp;Como Funcionará?</I><br></h4>
+
+        <ul></ul><I>Através de uma foto capturada por uma câmera que detecta a imagem, o usuário pode inserir a imagem
+            no sistema.
+            A seguir, um comando pode ser dado via texto ou reconhecimento de voz, <br>especificando o que a pessoa
+            deseja que seja descrito.
+            O sistema então gera uma descrição detalhada da imagem conforme solicitado.</I><br>
+        <br>
+        <h4>
+            <I>&emsp;Sobre os desenvolvedores
+        </h4></I><br>
+
+        <I>Foram definidas equipes, onde cada equipe ficou responsável por desenvolver uma parte do sistema,
+            com objetivo de oferecer um sistema preciso e resoluto.<br>
+            Nossos desenvolvedores foram orientados a desenvolver um sistema com precisão em descrição
+            de imagens através de áudio para o usuário. <br>
+            Com o intuito de entregar, não apenas um sistema que fornece uma ferramenta para acessibilidade,
+            mas também destaca a eficácia do trabalho colaborativo e da tecnologia de ponta na criação de <br>
+            soluções transformadoras.</I><br>
+        <br>
+
+        <h4><I>&emsp;Desenvolvedores responsáveis:<br></h4>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                Squad 1 – Responsável por criar um sistema que busca capturar imagens, e fazer a descrição audiovisual
+                para um deficiente visual.<br>
+                Membros do Squad : Firmino Silva, Léia Santos, Kleber Lopes, Marcela Carneiro, Amanda Santiago.<br>
+                <img id="logo01" src="media/img_sobreNos/s1.jpg" alt="texto descritivo da imagem">
+                <p hidden>
+                    texto descritivo da imagem
+                </p>
+                <img id="logo001" src="/media/img_sobreNos/s1.webp" alt="texto descritivo da imagem">
+                <p hidden>
+                    texto descritivo da imagem
+                </p>
+            </li>
+            <li class="list-group-item">
+                Squad 2 – Responsável por desenvolver página “Sobre Nós”<br>
+                Membros do Squad : Lana Karine, Lorena Arias, Samuel Natividade, Isabelle Rocha, Kaleb Souza<br>
+                <img id="logo" src="/media/img_sobreNos/transferir (1).jpg" alt="texto descritivo da imagem">
+                <p hidden>
+                    texto descritivo da imagem
+                </p>
+                <img id="logo2" src="/media/img_sobreNos/s2.png" alt="texto descritivo da imagem">
+                <p hidden>
+                    texto descritivo da imagem
+                </p>
+            </li>
+            <li class="list-group-item">
+                Squad 3 – Responsável pela implementação do sistema com API da IA Gemini.<br>
+                Membros do Squad: Vitor, Hugo Borges, Leandro Carvalho, José Xavier.<br>
+                <img id="logo3" src="/media/img_sobreNos/s3.jpeg" alt="texto descritivo da imagem">
+                <p hidden>
+                    texto descritivo da imagem
+                </p>
+                <img id="logo03" src="/media/img_sobreNos/s3.webp" alt="texto descritivo da imagem">
+                <p hidden>
+                    texto descritivo da imagem
+                </p>
+            </li>
+    </div>
+
+    <p>
+    </p>
+    <audio src="{% static 'visualdef/audio_Teste.mp3' %}" id="audio_Teste"  autoplay></audio>
+
+    <script>
+        var audio = document.getElementById("audio_Teste");
+
+        document.addEventListener("click", function () {
+            if (audio.paused) {
+                audio.play();
+            } else{
+                audio.pause();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
