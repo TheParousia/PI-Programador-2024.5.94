@@ -83,11 +83,11 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'visualdef',
-        'USER': 'visualdef_sys',
-        'PASSWORD': 'qwer1234',
-        'HOST': '172.16.0.126',
-        'PORT': '3306',
+        'NAME':"teste",
+        'USER': "visualdef",
+        'PASSWORD': "qwer1234",
+        'HOST': "172.16.0.114",
+        'PORT': "3306",
     }
 }
 
